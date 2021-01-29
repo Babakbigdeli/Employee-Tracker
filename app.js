@@ -6,7 +6,7 @@ const consoleTable = require('console.table');
 //Setting up connection 
 const connection = mysql.createConnection({
     host: 'localhost',
-    port: 8080,
+    port: 3306,
     user: 'root',
     //change this to your SQL password
     password: '2040365',
@@ -38,4 +38,12 @@ function firstUserInputPrompt() {
               "Exit?"
             ]
     }
-    
+    //Adding Switch cases to pick the relative function based on users choice
+]).then(function(answer) {
+    switch (answer.action) {
+        case "View All Employees?":
+          viewAllEmployees();
+        break;
+    }
+})
+}
