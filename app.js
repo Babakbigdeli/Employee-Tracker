@@ -19,3 +19,23 @@ connection.connect(function(err) {
     firstUserInputPrompt();
 });
 
+// First User Input Prompt
+
+function firstUserInputPrompt() {
+    inquirer.prompt([
+    {
+    type: "list",
+    message: "What would you like to do?",
+    name: "actions",
+    choices: [
+              "View All Employees?", 
+              "View All Employee's By Roles?",
+              "View all Employees By Department?", 
+              "Update Employee Role?",
+              "Add Employee?",
+              "Add Role?",
+              "Add Department?",
+              "Exit?"
+            ]
+    }
+    
