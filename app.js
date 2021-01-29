@@ -94,3 +94,21 @@ function viewAllEmployees() {
       firstInputPrompt();
   })
 }
+
+//Second Choice function
+
+function viewAllRoles() {
+    connection.query(`SELECT role.title, employee.id, employee.first_name, employee.last_name, department.name AS department
+    FROM employee
+    LEFT JOIN role ON (role.id = employee.role_id)
+    LEFT JOIN department ON (department.id = role.department_id)
+    ORDER BY role.title;`, 
+    function(err, res) {
+      if (err) throw err
+      console.log('\n');
+      console.log('VIEW ALL EMPLOYEES BY ROLES');
+      console.log('\n');
+      console.table(res)
+      firstInputPrompt();
+  })
+}
