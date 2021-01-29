@@ -1,3 +1,5 @@
+USE employee_tracker_db;
+
 -- Seeding DEPARTMENT table 
 INSERT INTO department (name)
 VALUE ("Finance");
@@ -26,16 +28,16 @@ VALUE ("Admin Clerk", 25000, 2);
 
 -- Seeding EMPLOYEE table
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Johnny", "Depp", 3, 1);
+VALUE ("Johnny", "Depp", null, 1);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Tom", "Hanks", 2, 2);
+VALUE ("Tom", "Hanks", null, 2);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Mia","Lebbof", null, 3);
+VALUE ("Mia","Lebbof", 2, 3);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Chris", "Cornell", 1, 4);
+VALUE ("Chris", "Cornell", null, 4);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
 VALUE ("Steve", "Probst", null, 5);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Anita", "Karim", 1, 6);
+VALUE ("Anita", "Karim", 2, 6);
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("Elie", "Okobo", 2, 7);
+VALUE ("Elie", "Okobo", 1, 7);
