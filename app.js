@@ -41,8 +41,37 @@ function firstUserInputPrompt() {
     //Adding Switch cases to pick the relative function based on users choice
 ]).then(function(answer) {
     switch (answer.action) {
+        
         case "View All Employees?":
-          viewAllEmployees();
+           viewAllEmployees();
+        break;
+
+        case "View All Employee's By Roles?":
+           viewAllRoles();
+        break;
+
+        case "View all Employees By Department?":
+            viewAllDepartments();
+        break;
+
+        case "Update Employee Role?":
+            updateEmployee();
+        break;
+
+        case "Add Employee?":
+            addEmployee();
+        break;
+
+        case "Add Role?":
+            addRole();
+        break;
+    
+        case "Add Department?":
+            addDepartment();
+        break;
+
+        case "Exit?":
+            connection.end();
         break;
     }
 })
