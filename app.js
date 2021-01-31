@@ -137,21 +137,21 @@ function updateEmployee() {
     inquirer
       .prompt([
         {
-          type: "input",
-          message: "Which employee would you like to update (Use First Name)?",
-          name: "empUpdate"
+        type: "input",
+        message: "Which employee would you like to update (Use First Name)?",
+        name: "empUpdate"
         },
   
         {
-          type: "input",
-          message: "What do you want to update to (Enter ID of new role)?",
-          name: "updateRole"
+        type: "input",
+        message: "What do you want to update to (Enter ID of new role)?",
+        name: "updateRole"
         }
       ]).then(function(answer) {
-          connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.empUpdate],function(err, res) {
-          if (err) throw err;
-          console.table(res);
-          firstInputPrompt();
+        connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.empUpdate],function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        firstInputPrompt();
         });
       });
   }
@@ -187,9 +187,42 @@ function addEmployee() {
         
         connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.newEmpFirstName, answer.newEmpLastName, answer.newEmpRoleID, answer.NewEmpManagerID],
         function(err, res) {
-          if (err) throw err;
-          console.table(res);
-          firstInputPrompt();
+        if (err) throw err;
+        console.table(res);
+        firstInputPrompt();
         });
       });
   }
+
+//Sixth Choice function
+
+function addRole() { 
+connection.query(`SELECT role.title AS Title, role.salary AS Salary FROM role`,
+function() {
+    inquirer.prompt([
+        {
+        name: "Title",
+        type: "input",
+        message: "What is the new role's Title?"
+        },
+        {
+        name: "Salary",
+        type: "input",
+        message: "What is the new role's Salary?"
+
+        } 
+    ]).then(function(answer) {
+        connection.query(
+        "INSERT INTO role SET ?",
+        {
+        title: answer.Title,
+        salary: answer.Salary,
+        },
+        function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        firstInputPrompt();
+        });
+        });
+});
+}
