@@ -147,9 +147,46 @@ function updateEmployee() {
           message: "What do you want to update to (Enter ID of new role)?",
           name: "updateRole"
         }
+      ]).then(function(answer) {
+          connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.empUpdate],function(err, res) {
+          if (err) throw err;
+          console.table(res);
+          firstInputPrompt();
+        });
+      });
+  }
+
+//Fifth Choice function
+
+function addEmployee() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "What's the new employee's first name?",
+          name: "newEmpFirstName"
+        },
+        {
+          type: "input",
+          message: "What's the new employee's last name?",
+          name: "newEmpLastName"
+        },
+        {
+          type: "input",
+          message: "What is the new employee's role id number?",
+          name: "newEmpRoleID"
+        },
+        {
+          type: "input",
+          message: "What is the new employee's manager id number?",
+          name: "NewEmpManagerID"
+        }
       ])
       .then(function(answer) {
-          connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.empUpdate],function(err, res) {
+  
+        
+        connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.newEmpFirstName, answer.newEmpLastName, answer.newEmpRoleID, answer.NewEmpManagerID],
+        function(err, res) {
           if (err) throw err;
           console.table(res);
           firstInputPrompt();
