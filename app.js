@@ -201,15 +201,14 @@ connection.query(`SELECT role.title AS Title, role.salary AS Salary FROM role`,
 function() {
     inquirer.prompt([
         {
-        name: "Title",
         type: "input",
-        message: "What is the new role's Title?"
+        message: "What is the new role's Title?",
+        name: "Title"
         },
         {
-        name: "Salary",
         type: "input",
-        message: "What is the new role's Salary?"
-
+        message: "What is the new role's Salary?",
+        name: "Salary"
         } 
     ]).then(function(answer) {
         connection.query(
@@ -231,13 +230,10 @@ function() {
 
 function addDepartment() {
     inquirer.prompt({
-      
     type: "input",
     message: "What is the name of the new department?",
     name: "newDeptName"
-
     }).then(function(answer){
-
     connection.query("INSERT INTO department (name) VALUES (?)", [answer.newDeptName] , function(err, res) {
     if (err) throw err;
     console.table(res);
@@ -245,3 +241,4 @@ function addDepartment() {
     })
     })
 }
+
