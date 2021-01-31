@@ -1,4 +1,4 @@
-// Defining dependencies 
+// Bringing in dependencies 
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const consoleTable = require('console.table');
@@ -28,17 +28,19 @@ function firstInputPrompt() {
     message: "What would you like to do?",
     name: "actions",
     choices: [
-              "View All Employees?", 
-              "View All Employee's By Roles?",
-              "View all Employees By Department?", 
-              "Update Employee Role?",
-              "Add Employee?",
-              "Add Role?",
-              "Add Department?",
-              "Exit?"
-            ]
+        "View All Employees?", 
+        "View All Employee's By Roles?",
+        "View all Employees By Department?", 
+        "Update Employee Role?",
+        "Add Employee?",
+        "Add Role?",
+        "Add Department?",
+        "Exit?"
+        ]
     }
-    //Adding Switch cases to pick the relative function based on users choice
+
+//Adding Switch cases to pick the relative function based on users choice
+
 ]).then(function(answer) {
     switch (answer.actions) {
 
@@ -162,29 +164,27 @@ function addEmployee() {
     inquirer
       .prompt([
         {
-          type: "input",
-          message: "What's the new employee's first name?",
-          name: "newEmpFirstName"
+        type: "input",
+        message: "What's the new employee's first name?",
+        name: "newEmpFirstName"
         },
         {
-          type: "input",
-          message: "What's the new employee's last name?",
-          name: "newEmpLastName"
+        type: "input",
+        message: "What's the new employee's last name?",
+        name: "newEmpLastName"
         },
         {
-          type: "input",
-          message: "What is the new employee's role id number?",
-          name: "newEmpRoleID"
+        type: "input",
+        message: "What is the new employee's role id number?",
+        name: "newEmpRoleID"
         },
         {
-          type: "input",
-          message: "What is the new employee's manager id number?",
-          name: "NewEmpManagerID"
+        type: "input",
+        message: "What is the new employee's manager id number?",
+        name: "NewEmpManagerID"
         }
       ])
       .then(function(answer) {
-  
-        
         connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.newEmpFirstName, answer.newEmpLastName, answer.newEmpRoleID, answer.NewEmpManagerID],
         function(err, res) {
         if (err) throw err;
@@ -225,4 +225,23 @@ function() {
         });
         });
 });
+}
+
+//Seventh Choice function
+
+function addDepartment() {
+    inquirer.prompt({
+      
+    type: "input",
+    message: "What is the name of the new department?",
+    name: "newDeptName"
+
+    }).then(function(answer){
+
+    connection.query("INSERT INTO department (name) VALUES (?)", [answer.newDeptName] , function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    firstInputPrompt()
+    })
+    })
 }
