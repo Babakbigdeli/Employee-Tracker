@@ -230,15 +230,15 @@ function() {
 
 function addDepartment() {
     inquirer.prompt({
-    type: "input",
-    message: "What is the name of the new department?",
-    name: "newDeptName"
-    }).then(function(answer){
-    connection.query("INSERT INTO department (name) VALUES (?)", [answer.newDeptName] , function(err, res) {
-    if (err) throw err;
-    console.table(res);
-    firstInputPrompt()
-    })
+        type: "input",
+        message: "What is the name of the new department?",
+        name: "newDeptName"
+        }).then(function(answer){
+        connection.query("INSERT INTO department (name) VALUES (?)", [answer.newDeptName] , function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        firstInputPrompt()
+        })
     })
 }
 
