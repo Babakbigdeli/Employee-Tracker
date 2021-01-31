@@ -131,3 +131,28 @@ function viewAllDepartments() {
   })
 }
 
+//Fourth Choice function
+
+function updateEmployee() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Which employee would you like to update (Use First Name)?",
+          name: "empUpdate"
+        },
+  
+        {
+          type: "input",
+          message: "What do you want to update to (Enter ID of new role)?",
+          name: "updateRole"
+        }
+      ])
+      .then(function(answer) {
+          connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.empUpdate],function(err, res) {
+          if (err) throw err;
+          console.table(res);
+          firstInputPrompt();
+        });
+      });
+  }
